@@ -51,7 +51,7 @@ class BLDR_loss(nn.Module):
         self.init_param(mean=mean, std=std)
         
         self.weight = torch.tensor([1.0 for i in range(num_examp)])
-        self.ratio = 0.0
+        self.ratio = 0.1
 
     def init_param(self, mean=0., std=1e-8):
         torch.nn.init.normal_(self.u1, mean=mean, std=std)
@@ -112,7 +112,7 @@ class BLDR_loss(nn.Module):
 
         if self.ratio_reg > 0:
 
-            loss += self.ratio_reg * self.ratio * MSE_loss 
+            loss += self.ratio_reg * self.ratio * self.ratio * MSE_loss 
 
 
         if self.ratio_balance > 0:
