@@ -1,5 +1,7 @@
 # Noise-Robust Bidirectional Learning with Dynamic Sample Reweighting
 
+A Submission for [LMNL 2022](http://ucsc-real.soe.ucsc.edu:1995/Competition.html)(1st Learning and Mining with Noisy Labels Challenge IJCAI-ECAI 2022).
+
 ## Usage
 ### Environments
 ```
