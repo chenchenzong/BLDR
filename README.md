@@ -26,7 +26,7 @@ pip install -r requirements.txt
 > nohup python3 train.py --dataset cifar10 --noise_type rand1  > c10_rand1.log
 > nohup python3 train.py --dataset cifar10 --noise_type aggre  > c10_aggre.log
 ```
-- For cifar 10 aggre/rand1/worst
+- For cifar 100 noisy
 ```
 > nohup python3 train.py --dataset cifar100 --noise_type noisy100 --updateW_epochs 40  > c100.log
 ```
