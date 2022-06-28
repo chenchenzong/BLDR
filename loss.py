@@ -45,7 +45,7 @@ class BLDR_loss(nn.Module):
         self.ratio_balance = ratio_balance
         self.ratio_reg = ratio_reg
 
-        self.u1 = nn.Parameter(torch.empty(num_examp, 1, dtype=torch.float32))
+        self.u1 = nn.Parameter(torch.empty(num_examp, num_classes, dtype=torch.float32))
         self.v1 = nn.Parameter(torch.empty(num_examp, num_classes, dtype=torch.float32))
 
         self.init_param(mean=mean, std=std)
