@@ -78,7 +78,7 @@ def evaluate(loader, model, save=False):
     nl_acc = 100*float(nl_correct)/float(total)
     acc = 100*float(correct)/float(total)
 
-    return pl_acc
+    return acc
 
 
 ##################################### main code ################################################
