@@ -2,9 +2,9 @@
 
 ## Usage
 ### Environments
-
-pip install -r requirements.txt
-
+```
+> pip install -r requirements.txt
+```
 ## Usage
 
 1. Clone to the local.
