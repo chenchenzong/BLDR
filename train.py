@@ -18,7 +18,7 @@ import copy
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--lr', type = float, default = 0.02)
+parser.add_argument('--lr', type = float, default = 0.04)
 parser.add_argument('--val_ratio', type = float, default = 0.05)
 parser.add_argument('--noise_type', type = str, help='clean, aggre, worst, rand1, rand2, rand3, clean100, noisy100', default='clean')
 parser.add_argument('--noise_path', type = str, help='path of CIFAR-10_human.pt', default=None)
@@ -39,7 +39,7 @@ parser.add_argument('--lr_u', type = float, default = 10)
 parser.add_argument('--lr_v', type = float, default = 10)
 parser.add_argument('--ratio_consistency', type = float, default = 0.9)
 parser.add_argument('--ratio_balance', type = float, default = 0.1)
-parser.add_argument('--ratio_reg', type = float, default = 25)
+parser.add_argument('--ratio_reg', type = float, default = 50)
 
 ## data_augmentation
 parser.add_argument('--aug_type', type = str, default="autoaug_cifar10")
@@ -242,7 +242,7 @@ test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
                                   shuffle=False)  
 
 print('building model...')
-model = multi_resnet34_kd(num_classes)
+model = ResNet34(num_classes)
 model = nn.DataParallel(model)
 print('building model done')
 model.to(args.device)
@@ -264,7 +264,7 @@ for epoch in range(args.n_epoch+args.updateW_epochs):
     if epoch >= args.updateW_epochs:
         lr_scheduler.step()
     # evaluate models
-    pl_test_acc, nl_test_acc, test_acc = evaluate(test_loader, model)
+    #pl_test_acc, nl_test_acc, test_acc = evaluate(test_loader, model)
 
     # EMA
     ema.decay = min(0.9,(1+epoch)/(10+epoch))
@@ -285,7 +285,7 @@ for epoch in range(args.n_epoch+args.updateW_epochs):
     # save results
     print("Learning rate: {}.".format(optimizer.state_dict()['param_groups'][0]['lr']))
     print('PL train acc: {}, NL train acc: {}.'.format(round(pl_train_acc,2), round(nl_train_acc,2)))
-    print('PL test acc: {}, NL test acc: {}, Ensemble test acc:{}.'.format(round(pl_test_acc,2), round(nl_test_acc,2),round(test_acc,2)))
+    #print('PL test acc: {}, NL test acc: {}, Ensemble test acc:{}.'.format(round(pl_test_acc,2), round(nl_test_acc,2),round(test_acc,2)))
     print('EMA PL test acc: {}, EMA NL test acc: {}, EMA Ensemble test acc:{}.'.format(round(ema_pl_test_acc,2), round(ema_nl_test_acc,2),round(ema_test_acc,2)))
     
     time_curr = time.time()
